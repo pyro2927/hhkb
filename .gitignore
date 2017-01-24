@@ -1,2 +1,9 @@
 obj_hhkb/
 .dep/
+*.eep
+*.elf
+*.hex
+*.lss
+*.map
+*.sym
+*.o
