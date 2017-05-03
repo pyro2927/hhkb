@@ -39,7 +39,7 @@
 #----------------------------------------------------------------------------
 
 # Target file name (without extension).
-TARGET ?= hhkb
+TARGET ?= hhkb_rn42
 
 # Directory common source filess exist
 TMK_DIR ?= ./tmk_core
@@ -47,12 +47,13 @@ TMK_DIR ?= ./tmk_core
 # Directory keyboard dependent files exist
 TARGET_DIR ?= .
 
-# List C source files here. (C dependencies are automatically generated.)
-SRC ?=	matrix.c \
-	led.c \
-	keymap.c
 
-CONFIG_H ?= config.h
+# List C source files here. (C dependencies are automatically generated.)
+SRC ?=  matrix.c \
+        led.c \
+        keymap.c
+
+CONFIG_H ?= config_rn42.h
 
 # MCU name
 MCU ?= atmega32u4
@@ -97,24 +98,25 @@ F_USB ?= $(F_CPU)
 # Boot Section Size in *bytes*
 #   Teensy halfKay   512
 #   Teensy++ halfKay 1024
-#   Atmel DFU loader 4096	(TMK Alt Controller)
+#   Atmel DFU loader 4096    (TMK Alt Controller)
 #   LUFA bootloader  4096
 #   USBaspLoader     2048
 OPT_DEFS += -DBOOTLOADER_SIZE=4096
 
+
 # Build Options
 #   comment out to disable the options.
 #
-#BOOTMAGIC_ENABLE ?= yes	# Virtual DIP switch configuration
-MOUSEKEY_ENABLE ?= yes		# Mouse keys
-EXTRAKEY_ENABLE ?= yes		# Audio control and System control
-CONSOLE_ENABLE ?= yes		# Console for debug
-COMMAND_ENABLE ?= yes    	# Commands for debug and configuration
-NKRO_ENABLE ?= yes		# USB Nkey Rollover
-#HHKB_JP ?= yes			# HHKB JP support
-#UNIMAP_ENABLE ?= yes		# Universal keymap
-#ACTIONMAP_ENABLE ?= yes	# Use 16bit actionmap instead of 8bit keymap
-#KEYMAP_SECTION_ENABLE ?= yes	# fixed address keymap for keymap editor
+#BOOTMAGIC_ENABLE ?= yes    # Virtual DIP switch configuration
+MOUSEKEY_ENABLE ?= yes        # Mouse keys
+EXTRAKEY_ENABLE ?= yes        # Audio control and System control
+CONSOLE_ENABLE ?= yes        # Console for debug
+COMMAND_ENABLE ?= yes        # Commands for debug and configuration
+NKRO_ENABLE ?= no        # USB Nkey Rollover
+#HHKB_JP ?= yes            # HHKB JP support
+#UNIMAP_ENABLE ?= yes        # Universal keymap
+#ACTIONMAP_ENABLE ?= yes    # Use 16bit actionmap instead of 8bit keymap
+#KEYMAP_SECTION_ENABLE ?= yes    # fixed address keymap for keymap editor
 
 #OPT_DEFS += -DNO_ACTION_TAPPING
 #OPT_DEFS += -DNO_ACTION_LAYER
@@ -124,6 +126,9 @@ NKRO_ENABLE ?= yes		# USB Nkey Rollover
 VPATH += $(TARGET_DIR)
 VPATH += $(TMK_DIR)
 
+# include rn42
+include rn42.mk
+include $(TMK_DIR)/protocol.mk
 include $(TMK_DIR)/protocol/lufa.mk
 include $(TMK_DIR)/common.mk
 include $(TMK_DIR)/rules.mk

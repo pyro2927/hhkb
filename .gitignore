@@ -1,4 +1,5 @@
 obj_hhkb/
+obj_hhkb_rn42/
 .dep/
 *.eep
 *.elf
